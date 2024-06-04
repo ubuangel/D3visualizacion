@@ -1,22 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document cuerpo</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title></title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <style>
+      div {
+        border: 3px solid red;
+        border-radius: 5;
+        margin: auto;
+      }
+    </style>
 
-   
+    <h1>Pie Chart</h1>
+
+    <div class="pie-chart">
+      <svg class="pie-chart"></svg>
+    </div>
+
+    <script>
+      let width = 300
+      let height = 300
+      let pieRadius = 100
+      let cornerRadius = 5
+
+      let someData = [
+        { class: 'soph', num_students: 10 },
+        { class: 'junr', num_students: 20 },
+        { class: 'senr', num_students: 27 },
+      ]
+
+      colorScale = d3
+        .scaleOrdinal()
+        .domain(someData.map(d => d.class))
+        .range(['red', 'green', 'blue'])
+
+      let pieGenerator = d3
+        .pie()
+        .value(d => d.num_students)
+        .padAngle(0.03)
+
+      let arcGenerator = d3
+        .arc()
+        .innerRadius(0.3 * pieRadius)
+        .outerRadius(pieRadius)
+        .cornerRadius(cornerRadius)
+
+      d3.selectAll('div.pie-chart')
+        .style('width', width + 'px')
+        .style('height', height + 'px')
+      d3.selectAll('svg.pie-chart')
+        .attr('width', width)
+        .attr('height', height)
+
+      d3.select('svg.pie-chart')
+        .append('g')
+        .attr('transform', `translate(${1.5 * pieRadius}, ${1.5 * pieRadius})`)
+        .selectAll('path')
+        .data(pieGenerator(someData))
+        .enter()
+        .append('path')
+        .attr('d', arcGenerator) // think: d => arcGenerator(d)
+        .style('stroke', 'navy')
+        .style('fill', d => colorScale(d.data.class))
+        .style('fill-opacity', 0.3)
 
 
 
-</head>
-<body>
 
-    <svg width = 600 height = 400>
-        <circle cx = 300 cy = 200 r = 50 />      /* don't forget the / */
-      </svg>
+        d3.select("body")
+  .append("p")
+  .text("Here is some new text.")
+  .style("color", "red")
+    </script>
 
-      <p> gaaaaa</p>
+
+
     
-</body>
+
+
+  </body>
 </html>

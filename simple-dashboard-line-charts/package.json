@@ -1,0 +1,14 @@
+{
+  "name": "@geofduf/simple-dashboard-line-charts",
+  "main": "c73ba7836e15f9bf@1551.js",
+  "version": "1551.0.0",
+  "homepage": "https://observablehq.com/@geofduf/simple-dashboard-line-charts",
+  "author": {
+    "name": "Geoffrey Dufour",
+    "url": "https://observablehq.com/@geofduf"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
